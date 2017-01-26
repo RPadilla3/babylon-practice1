@@ -5,15 +5,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
   var createScene = function() {
     var scene = new babylon.Scene(engine);
-    scene.clearColor = new babylon.Color3.White();
+      scene.clearColor = new babylon.Color3.White();
     var material = new babylon.StandardMaterial('material1', scene);
-    material.wireframe = true;
+      material.wireframe = true;
     var box = babylon.Mesh.CreateBox('Box', 4.0, scene);
+    var sphere = babylon.Mesh.CreateSphere('sphere', 10, 4, scene);
+    sphere.position.x = -7.5;
+    var cone = babylon.Mesh.CreateCylinder('cone', 3,0,3,20, true, scene);
+    cone.position.z = -15;
 
     var camera = new babylon.ArcRotateCamera('arcCamera',
-    babylon.Tools.ToRadians(45),
-    babylon.Tools.ToRadians(45),
-    10.0, box.position, scene);
+      babylon.Tools.ToRadians(45),
+      babylon.Tools.ToRadians(45),
+      10.0, box.position, scene);
     camera.attachControl(canvas, true);
 
     var light = new babylon.PointLight('pointlight', new babylon.Vector3(0,10,0), scene);
@@ -37,4 +41,5 @@ window.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', function() {
     engine.resize();
   });
+
 });
