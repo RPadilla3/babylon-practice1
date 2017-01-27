@@ -8,29 +8,42 @@ window.addEventListener('DOMContentLoaded', function() {
     scene.clearColor = new babylon.Color3.White();
     var material = new babylon.StandardMaterial('material1', scene);
     material.wireframe = true;
-    var ground = babylon.Mesh.CreateGround('ground', 100,50,6, scene);
+    var ground = babylon.Mesh.CreateGround('ground', 100, 50, 6, scene);
     var box = babylon.Mesh.CreateBox('Box', 4, scene);
     box.position.y = 2;
     var box2 = babylon.Mesh.CreateBox('Box1', 4, scene);
     box2.position.y = 10;
+
     var fountain = babylon.Mesh.CreateBox('fountain', 2, scene);
     fountain.position.x = 20;
     fountain.position.y = 1;
-    var sphere = babylon.Mesh.CreateSphere('sphere', 10, 4, scene);
+
+    var sphere = babylon.Mesh.CreateSphere('sphere', 100, 4, scene);
     sphere.position.x = -7.5;
     sphere.position.y = 2;
-    var cone = babylon.Mesh.CreateCylinder('cone', 3,0,3,20, true, scene);
+
+    var materialSphere = new babylon.StandardMaterial('texture1', scene);
+    materialSphere.wireframe = true;
+    sphere.material = materialSphere;
+
+    var cone = babylon.Mesh.CreateCylinder('cone', 3, 0, 3, 20, true, scene);
     cone.position.z = 15;
     cone.position.y = 2;
-    var cone2 = babylon.Mesh.CreateCylinder('cone2', 3,3,0,20, true, scene);
+    var cone2 = babylon.Mesh.CreateCylinder('cone2', 3, 3, 0, 20, true, scene);
     cone2.position.z = 15;
     cone2.position.y = 3;
-    var torus = babylon.Mesh.CreateTorus('torus', 5,1,10, scene);
-    torus.position.y = 2;
-    torus.position.z = 20;
-    var knot = babylon.Mesh.CreateTorusKnot('knot', 3,1,10,20,2,3, scene);
+
+    var torus = babylon.Mesh.CreateTorus('torus', 3, 0.5, 100, scene);
+    torus.position.y = 2.5;
+    torus.position.z = 15;
+
+    var knot = babylon.Mesh.CreateTorusKnot('knot', 3, 1, 10, 20, 2, 3, scene);
     knot.position.x = 30;
     knot.position.y = 10;
+
+    var materialKnot = new babylon.StandardMaterial('texture1', scene);
+    materialKnot.wireframe = true;
+    knot.material = materialKnot;
 
     var keys = [];
     var animation = new babylon.Animation("animation", "rotation.z", 30, babylon.Animation.ANIMATIONTYPE_FLOAT,
@@ -55,18 +68,12 @@ window.addEventListener('DOMContentLoaded', function() {
     knot.animations.push(animation);
     scene.beginAnimation(knot, 0, 100, true);
 
-
-    var materialKnot = new babylon.StandardMaterial('texture1', scene);
-    materialKnot.wireframe = true;
-    knot.material = materialKnot;
-
     var torusKnot = babylon.Mesh.CreateTorusKnot('torusKnot', 3,1,100,8,2,3, scene);
     torusKnot.position.x = -30;
     torusKnot.position.y = 10;
 
-
     var materialtorusKnot1 = new babylon.StandardMaterial('texture1', scene);
-    materialtorusKnot1.alpha = 0.5;
+    materialtorusKnot1.alpha = 0.7;
     materialtorusKnot1.hasAlpha = true;
     torusKnot.material = materialtorusKnot1;
 
@@ -76,8 +83,10 @@ window.addEventListener('DOMContentLoaded', function() {
     10.0, box.position, scene);
     camera.attachControl(canvas, true);
 
-    var light = new babylon.PointLight('pointlight', new babylon.Vector3(0,50,0), scene);
-    light.diffuse = new babylon.Color3.FromHexString('#1f7979');
+    var light = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
+    light.diffuse = new BABYLON.Color3(1, 1, 1);
+    light.specular = new BABYLON.Color3(1, 1, 1);
+    light.groundColor = new BABYLON.Color3.FromHexString('#1f32ad');
 
     scene.actionManager = new babylon.ActionManager(scene);
     scene.actionManager.registerAction(
