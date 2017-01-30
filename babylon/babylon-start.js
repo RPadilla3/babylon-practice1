@@ -13,14 +13,15 @@ window.addEventListener('DOMContentLoaded', function() {
     box.position.y = 2;
     var box2 = babylon.Mesh.CreateBox('Box1', 4, scene);
     box2.position.y = 10;
+    var box3 = babylon.Mesh.CreateBox('Box2', 4, scene);
+    box3.position.y = 13;
 
     var fountain = babylon.Mesh.CreateBox('fountain', 2, scene);
     fountain.position.x = 20;
     fountain.position.y = 1;
 
     var sphere = babylon.Mesh.CreateSphere('sphere', 100, 4, scene);
-    sphere.position.x = -7.5;
-    sphere.position.y = 2;
+    sphere.position.y = 6;
 
     var materialSphere = new babylon.StandardMaterial('texture1', scene);
     materialSphere.wireframe = true;
@@ -33,7 +34,7 @@ window.addEventListener('DOMContentLoaded', function() {
     cone2.position.z = 15;
     cone2.position.y = 3;
 
-    var torus = babylon.Mesh.CreateTorus('torus', 3, 0.5, 100, scene);
+    var torus = babylon.Mesh.CreateTorus('torus', 3, 0.5, 1000, scene);
     torus.position.y = 2.5;
     torus.position.z = 15;
 
@@ -46,7 +47,7 @@ window.addEventListener('DOMContentLoaded', function() {
     knot.material = materialKnot;
 
     var keys = [];
-    var animation = new babylon.Animation("animation", "rotation.z", 30, babylon.Animation.ANIMATIONTYPE_FLOAT,
+    var animation = new babylon.Animation("animation", "rotation.z", 75, babylon.Animation.ANIMATIONTYPE_FLOAT,
     babylon.Animation.ANIMATIONLOOPMODE_CYCLE);
 
     keys.push({
@@ -55,8 +56,8 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
     keys.push({
-      frame: 50,
-      value: Math.PI
+      frame: 70,
+      value: Math.PI/2
     });
 
     keys.push({
@@ -80,7 +81,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var camera = new babylon.ArcRotateCamera('arcCamera',
     babylon.Tools.ToRadians(45),
     babylon.Tools.ToRadians(45),
-    10.0, box.position, scene);
+    100, box.position, scene);
     camera.attachControl(canvas, true);
 
     var light = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
